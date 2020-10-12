@@ -49,8 +49,8 @@
 
 <div class="container">
   <h1>Bootstrap starter template</h1>
-  <transition name="slide-fade"><p v-if="show_text_1">Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p></transition>
-  <transition name="slide-fade"><p v-if="show_text_2">This is another sentence.<br> Hi there.</p></transition>
+  <transition name="slide-fade"><p v-show="show_text_1" id="text_1"></p></transition>
+  <transition name="slide-fade"><p v-show="show_text_2" id="text_2"></p></transition>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -58,9 +58,15 @@
 new Vue({
   el: '#vueContent',
   data: {
-    show_text_1: true,
+    show_text_1: false,
     show_text_2: false
   },
+  mounted: function(){
+    console.log(document.getElementById("text_1").innerText);
+    document.getElementById("text_1").innerHTML = "Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document."
+    document.getElementById("text_2").innerHTML = "This is another sentence.<br> Hi there."
+   setTimeout(() => this.show_text_1 = true, 400);
+ },
   methods: {
    slide_text_home: function (event) {
      // `this` inside methods points to the Vue instance
