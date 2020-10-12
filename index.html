@@ -26,7 +26,7 @@
         transition: all .3s ease;
       }
       .slide-fade-leave-active {
-        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
       }
       .slide-fade-enter, .slide-fade-leave-to
       /* .slide-fade-leave-active for below version 2.1.8 */ {
@@ -41,15 +41,16 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
   <h5 class="my-0 mr-md-auto font-weight-normal">Home</h5>
   <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" href="#" v-on:click="show = !show">Home</a>
-    <a class="p-2 text-dark" href="#">About me</a>
+    <a class="p-2 text-dark" href="#" v-on:click="slide_text_home">Home</a>
+    <a class="p-2 text-dark" href="#" v-on:click="slide_text_about_me">About me</a>
     <a class="p-2 text-dark" href="#">Contect me</a>
   </nav>
 </div>
 
 <div class="container">
   <h1>Bootstrap starter template</h1>
-  <transition name="slide-fade"><p v-if="show">Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p></transition>
+  <transition name="slide-fade"><p v-if="show_text_1">Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p></transition>
+  <transition name="slide-fade"><p v-if="show_text_2">This is another sentence.<br> Hi there.</p></transition>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -57,8 +58,21 @@
 new Vue({
   el: '#vueContent',
   data: {
-    show: true
-  }
+    show_text_1: true,
+    show_text_2: false
+  },
+  methods: {
+   slide_text_home: function (event) {
+     // `this` inside methods points to the Vue instance
+     this.show_text_2 = false;
+     setTimeout(() => this.show_text_1 = true, 400);
+   },
+   slide_text_about_me: function (event) {
+     // `this` inside methods points to the Vue instance
+     this.show_text_1 = false;
+     setTimeout(() => this.show_text_2 = true, 400);
+   }
+ }
 })
 </script>
 
