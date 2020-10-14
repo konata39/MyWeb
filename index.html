@@ -5,6 +5,7 @@
     <title>Bootstrap</title>
     <!-- Bootstrap core CSS -->
 <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -48,9 +49,11 @@
 </div>
 
 <div class="container">
-  <h1>Bootstrap starter template</h1>
-  <transition name="slide-fade"><p v-show="show_text_1" id="text_1"></p></transition>
+  <transition name="slide-fade"><h1 v-show="show_text_title" id="text_title" style="position:absolute;top:45%;left:33%;font-size:72px;"></h1></transition>
+  <transition name="slide-fade"><p v-show="show_text_home" id="text_home" style="position:absolute;top:55%;left:33%; font-size:24px;"></p></transition>
   <transition name="slide-fade"><p v-show="show_text_2" id="text_2"></p></transition>
+  <transition name="slide-fade"><img v-show="show_icon" id="icon" width="20%" heigth="20%" style="position:absolute;top:33%;left:45%;"></img></transition>
+  <transition name="slide-fade"><p v-show="show_icon" id="text_home_2" style="position:absolute;top:63%;left:45%; font-size:48px; font-family: 'Roboto Slab', serif;"></p></transition>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -58,25 +61,37 @@
 new Vue({
   el: '#vueContent',
   data: {
-    show_text_1: false,
-    show_text_2: false
+    show_text_title: false,
+    show_text_home: false,
+    show_text_home_2: true,
+    show_text_2: false,
+    show_icon: false
   },
   mounted: function(){
-    console.log(document.getElementById("text_1").innerText);
-    document.getElementById("text_1").innerHTML = "Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document."
-    document.getElementById("text_2").innerHTML = "This is another sentence.<br> Hi there."
-   setTimeout(() => this.show_text_1 = true, 400);
+    console.log(document.getElementById("text_home").innerText);
+    document.getElementById("text_title").innerHTML = "Hello!";
+    document.getElementById("text_home").innerHTML = "welcome to...";
+    document.getElementById("text_home_2").innerHTML = "Konata's Website!";
+    document.getElementById("text_2").innerHTML = "This is another sentence.<br> Hi there.";
+    document.getElementById("icon").src = "konata_icon.png";
+   setTimeout(() => this.show_text_title = true, 100);
+   setTimeout(() => this.show_text_home = true, 400);
+   setTimeout(() => this.show_icon = true, 700);
  },
   methods: {
    slide_text_home: function (event) {
      // `this` inside methods points to the Vue instance
      this.show_text_2 = false;
-     setTimeout(() => this.show_text_1 = true, 400);
+     setTimeout(() => this.show_text_title = true, 300);
+     setTimeout(() => this.show_text_home = true, 500);
+     setTimeout(() => this.show_icon = true, 700);
    },
    slide_text_about_me: function (event) {
      // `this` inside methods points to the Vue instance
-     this.show_text_1 = false;
-     setTimeout(() => this.show_text_2 = true, 400);
+     this.show_text_title = false;
+     setTimeout(() => this.show_text_home = false, 200);
+     setTimeout(() => this.show_icon = false, 400);
+     setTimeout(() => this.show_text_2 = true, 600);
    }
  }
 })
