@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+<link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .slide-fade-enter-active {
+        transition: all .3s ease;
+      }
+      .slide-fade-leave-active {
+        transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+      }
+      .slide-fade-enter, .slide-fade-leave-to
+      /* .slide-fade-leave-active for below version 2.1.8 */ {
+        transform: translateX(10px);
+        opacity: 0;
+      }
+    </style>
+    <!-- Custom styles for this template -->
+  </head>
+  <body>
+  <div id="vueContent">
+
+<div class="container" width="1200px">
+	<transition name="slide-fade"><img v-show="show_pic" id="pic" width="20%" heigth="20%" style="position:absolute;top:3%;left:10%;"></img></transition>
+	<div style="position:absolute;top:3%;left:40%;font-size:24px;">
+		<transition name="slide-fade"><p v-show="show_name" id="name"></p></transition>
+		<transition name="slide-fade"><p v-show="show_school" id="school"></p></transition>
+		<transition name="slide-fade"><p v-show="show_major" id="major"></p></transition>
+    <transition name="slide-fade"><p v-show="show_degree" id="degree"></p></transition>
+    <transition name="slide-fade"><p v-show="show_github" id="github"></p></transition>
+	</div>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+<script>
+new Vue({
+  el: '#vueContent',
+  data: {
+  show_name: false,
+	show_school: false,
+	show_major: false,
+  show_github: false,
+  show_content: false,
+	show_pic: false
+  },
+  mounted: function(){
+	document.getElementById("pic").src = "konata_icon.png";
+  document.getElementById("name").innerHTML = "Name: 呂萬瑋(Wan-Wei Lu)";
+	document.getElementById("school").innerHTML = "Graduate From: 國立成功大學(National Cheng Kung University)";
+	document.getElementById("major").innerHTML = "Major: 資訊工程學系(Computer Science and Information Engineering)";
+  document.getElementById("degree").innerHTML = "Degree: 碩士(Master)";
+  document.getElementById("github").innerHTML = "github: <a href=\"https://github.com/konata39\" target=\"_blank\">konata's github</a>";
+   setTimeout(() => this.show_pic = true, 100);
+   setTimeout(() => this.show_name = true, 300);
+   setTimeout(() => this.show_school = true, 500);
+   setTimeout(() => this.show_major = true, 700);
+   setTimeout(() => this.show_degree = true, 900);
+   setTimeout(() => this.show_github = true, 1100);
+ },
+})
+</script>
+
+</body>
+</html>

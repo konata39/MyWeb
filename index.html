@@ -26,14 +26,15 @@
       .slide-fade-enter-active {
         transition: all .3s ease;
       }
-      .slide-fade-leave-active {
+      .slide-fade-leave-active, .slide-page-leave-active {
         transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
       }
-      .slide-fade-enter, .slide-fade-leave-to
+      .slide-fade-enter, .slide-fade-leave-to, .slide-page-leave-to
       /* .slide-fade-leave-active for below version 2.1.8 */ {
         transform: translateX(10px);
         opacity: 0;
       }
+
     </style>
     <!-- Custom styles for this template -->
   </head>
@@ -51,9 +52,10 @@
 <div class="container">
   <transition name="slide-fade"><h1 v-show="show_text_title" id="text_title" style="position:absolute;top:45%;left:33%;font-size:72px;"></h1></transition>
   <transition name="slide-fade"><p v-show="show_text_home" id="text_home" style="position:absolute;top:55%;left:33%; font-size:24px;"></p></transition>
-  <transition name="slide-fade"><p v-show="show_text_2" id="text_2"></p></transition>
   <transition name="slide-fade"><img v-show="show_icon" id="icon" width="20%" heigth="20%" style="position:absolute;top:33%;left:45%;"></img></transition>
   <transition name="slide-fade"><p v-show="show_icon" id="text_home_2" style="position:absolute;top:63%;left:45%; font-size:48px; font-family: 'Roboto Slab', serif;"></p></transition>
+
+  <transition name="slide-page"><iframe src="" v-show="show_text_2" id="text_2" style="display: block; width: 100%; height: 1200px; border: 0;"></iframe></transition>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -68,11 +70,9 @@ new Vue({
     show_icon: false
   },
   mounted: function(){
-    console.log(document.getElementById("text_home").innerText);
     document.getElementById("text_title").innerHTML = "Hello!";
     document.getElementById("text_home").innerHTML = "welcome to...";
     document.getElementById("text_home_2").innerHTML = "Konata's Website!";
-    document.getElementById("text_2").innerHTML = "This is another sentence.<br> Hi there.";
     document.getElementById("icon").src = "konata_icon.png";
    setTimeout(() => this.show_text_title = true, 100);
    setTimeout(() => this.show_text_home = true, 400);
@@ -91,7 +91,8 @@ new Vue({
      this.show_text_title = false;
      setTimeout(() => this.show_text_home = false, 200);
      setTimeout(() => this.show_icon = false, 400);
-     setTimeout(() => this.show_text_2 = true, 600);
+     setTimeout(() => {this.show_text_2 = true; document.getElementById("text_2").src="about_me.html";}, 600);
+
    }
  }
 })
