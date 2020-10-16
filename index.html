@@ -45,7 +45,7 @@
   <nav class="my-2 my-md-0 mr-md-3">
     <a class="p-2 text-dark" href="#" v-on:click="slide_text_home">Home</a>
     <a class="p-2 text-dark" href="#" v-on:click="slide_text_about_me">About me</a>
-    <a class="p-2 text-dark" href="#">Contect me</a>
+    <a class="p-2 text-dark" href="#" v-on:click="slide_text_contact_me">Contact me</a>
   </nav>
 </div>
 
@@ -55,7 +55,10 @@
   <transition name="slide-fade"><img v-show="show_icon" id="icon" width="20%" heigth="20%" style="position:absolute;top:33%;left:45%;"></img></transition>
   <transition name="slide-fade"><p v-show="show_icon" id="text_home_2" style="position:absolute;top:63%;left:45%; font-size:48px; font-family: 'Roboto Slab', serif;"></p></transition>
 
-  <transition name="slide-page"><iframe src="" v-show="show_text_2" id="text_2" style="display: block; width: 100%; height: 1200px; border: 0;"></iframe></transition>
+  <transition name="slide-page"><iframe src="" v-show="show_about_me" id="about_me" style="display: block; width: 100%; height: 1200px; border: 0;"></iframe></transition>
+
+  <transition name="slide-page"><iframe src="" v-show="show_contact_me" id="contact_me" style="display: block; width: 100%; height: 1200px; border: 0;"></iframe></transition>
+
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -66,7 +69,8 @@ new Vue({
     show_text_title: false,
     show_text_home: false,
     show_text_home_2: true,
-    show_text_2: false,
+    show_about_me: false,
+    show_contact_me: false,
     show_icon: false
   },
   mounted: function(){
@@ -81,7 +85,8 @@ new Vue({
   methods: {
    slide_text_home: function (event) {
      // `this` inside methods points to the Vue instance
-     this.show_text_2 = false;
+     this.show_about_me = false;
+     this.show_contact_me = false;
      setTimeout(() => this.show_text_title = true, 300);
      setTimeout(() => this.show_text_home = true, 500);
      setTimeout(() => this.show_icon = true, 700);
@@ -89,10 +94,18 @@ new Vue({
    slide_text_about_me: function (event) {
      // `this` inside methods points to the Vue instance
      this.show_text_title = false;
+     this.show_contact_me = false;
      setTimeout(() => this.show_text_home = false, 200);
      setTimeout(() => this.show_icon = false, 400);
-     setTimeout(() => {this.show_text_2 = true; document.getElementById("text_2").src="about_me.html";}, 600);
-
+     setTimeout(() => {this.show_about_me = true; document.getElementById("about_me").src="about_me.html";}, 600);
+   },
+   slide_text_contact_me: function (event) {
+     // `this` inside methods points to the Vue instance
+     this.show_text_title = false;
+     this.show_about_me = false;
+     setTimeout(() => this.show_text_home = false, 200);
+     setTimeout(() => this.show_icon = false, 400);
+     setTimeout(() => {this.show_contact_me = true; document.getElementById("contact_me").src="contact_me.html";}, 600);
    }
  }
 })

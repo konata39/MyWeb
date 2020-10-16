@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+<link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .slide-fade-enter-active {
+        transition: all .3s ease;
+      }
+      .slide-fade-leave-active {
+        transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+      }
+      .slide-fade-enter, .slide-fade-leave-to
+      /* .slide-fade-leave-active for below version 2.1.8 */ {
+        transform: translateX(10px);
+        opacity: 0;
+      }
+    </style>
+    <!-- Custom styles for this template -->
+  </head>
+  <body>
+  <div id="vueContent">
+
+<div class="container" width="1200px">
+	<transition name="slide-fade"><img v-show="show_fb_pic" id="fb_pic" width="20%" heigth="10%" style="position:absolute;top:3%;left:5%;"></img></transition>
+  <transition name="slide-fade"><img v-show="show_gmail_pic" id="gmail_pic" width="15%" heigth="10%" style="position:absolute;top:23%;left:7%;"></img></transition>
+  <transition name="slide-fade"><img v-show="show_linkedin_pic" id="linkedin_pic" width="15%" heigth="10%" style="position:absolute;top:38%;left:7%;"></img></transition>
+
+  <transition name="slide-fade"><h1 v-show="show_fb_text" id="fb_text" style="position:absolute;top:9%;left:29%;font-size:60px;"></h1></transition>
+  <transition name="slide-fade"><h1 v-show="show_gmail_text" id="gmail_text" style="position:absolute;top:25%;left:29%;font-size:60px;"></h1></transition>
+  <transition name="slide-fade"><h1 v-show="show_linkedin_text" id="linkedin_text" style="position:absolute;top:41%;left:29%;font-size:60px;"></h1></transition>
+	</div>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+<script>
+new Vue({
+  el: '#vueContent',
+  data: {
+	show_fb_pic: false,
+  show_gmail_pic: false,
+  show_linkedin_pic: false,
+
+  show_fb_text: false,
+  show_gmail_text: false,
+  show_linkedin_text: false
+  },
+  mounted: function(){
+	document.getElementById("fb_pic").src = "fb.png";
+  document.getElementById("gmail_pic").src = "Gmail_Icon.png";
+  document.getElementById("linkedin_pic").src = "linkedin.png";
+
+  document.getElementById("fb_text").innerHTML = "<a href=\"https://www.facebook.com/profile.php?id=100002475280679\" target=\"_blank\">My Facebook</a>";
+  document.getElementById("gmail_text").innerHTML = "akiyamakonata@gmail.com";
+  document.getElementById("linkedin_text").innerHTML = "<a href=\"https://www.linkedin.com/in/wan-wei-lu-a1ba0617b/\" target=\"_blank\">My Linkedin</a>";
+   setTimeout(() => this.show_fb_pic = true, 100);
+   setTimeout(() => this.show_fb_text = true, 100);
+   setTimeout(() => this.show_gmail_pic = true, 400);
+   setTimeout(() => this.show_gmail_text = true, 400);
+   setTimeout(() => this.show_linkedin_pic = true, 700);
+   setTimeout(() => this.show_linkedin_text = true, 700);
+ },
+})
+</script>
+
+</body>
+</html>
