@@ -34,6 +34,10 @@
         transform: translateX(10px);
         opacity: 0;
       }
+      #icon {
+        transition: opacity 0.5s ease;
+      }
+
 
     </style>
     <!-- Custom styles for this template -->
@@ -42,18 +46,19 @@
   <div id="vueContent">
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
   <h5 class="my-0 mr-md-auto font-weight-normal">Home</h5>
-  <nav class="my-2 my-md-0 mr-md-3">
+  <nav class="my-2 my-md-0 mr-md-4">
+    <a class="p-2 text-dark" href="#" v-on:click="slide_text_light">Dark mode</a>
     <a class="p-2 text-dark" href="#" v-on:click="slide_text_home">Home</a>
     <a class="p-2 text-dark" href="#" v-on:click="slide_text_about_me">About me</a>
     <a class="p-2 text-dark" href="#" v-on:click="slide_text_contact_me">Contact me</a>
   </nav>
 </div>
 
-<div class="container">
+<div class="container" id="container">
   <transition name="slide-fade"><h1 v-show="show_text_title" id="text_title" style="position:absolute;top:45%;left:33%;font-size:72px;"></h1></transition>
   <transition name="slide-fade"><p v-show="show_text_home" id="text_home" style="position:absolute;top:55%;left:33%; font-size:24px;"></p></transition>
-  <transition name="slide-fade"><img v-show="show_icon" id="icon" width="20%" heigth="20%" style="position:absolute;top:33%;left:45%;"></img></transition>
-  <transition name="slide-fade"><p v-show="show_icon" id="text_home_2" style="position:absolute;top:63%;left:45%; font-size:48px; font-family: 'Roboto Slab', serif;"></p></transition>
+  <transition name="slide-fade"><img v-show="show_icon":src="iconSrc" id="icon" width="10%" heigth="10%" style="position:absolute;top:39%;left:50%;"></img></transition>
+  <transition name="slide-fade"><p v-show="show_icon" id="text_home_2" style="position:absolute;top:60%;left:45%; font-size:48px; font-family: 'Roboto Slab', serif;"></p></transition>
 
   <transition name="slide-page"><iframe src="" v-show="show_about_me" id="about_me" style="display: block; width: 100%; height: 1200px; border: 0;"></iframe></transition>
 
@@ -71,18 +76,40 @@ new Vue({
     show_text_home_2: true,
     show_about_me: false,
     show_contact_me: false,
-    show_icon: false
+    show_icon: false,
+    iconSrc: 'CP.png'
   },
   mounted: function(){
     document.getElementById("text_title").innerHTML = "Hello!";
     document.getElementById("text_home").innerHTML = "welcome to...";
-    document.getElementById("text_home_2").innerHTML = "Konata's Website!";
-    document.getElementById("icon").src = "konata_icon.png";
+    document.getElementById("text_home_2").innerHTML = "Konata's Workshop!";
+    //document.getElementById("icon").src = "CP.png";
    setTimeout(() => this.show_text_title = true, 100);
    setTimeout(() => this.show_text_home = true, 400);
    setTimeout(() => this.show_icon = true, 700);
  },
   methods: {
+    slide_text_light: function (event) {
+      // `this` inside methods points to the Vue instance
+      const body = document.body;
+      const icon = document.getElementById('icon');
+      const container = document.getElementById("container");
+      if (body.style.backgroundColor === 'black') {
+        body.style.transition = 'background-color 0.5s ease';
+        body.style.backgroundColor = 'white';
+        icon.style.transition = 'filter 0.5s ease';
+        this.iconSrc = 'CP.png';
+        container.style.transition = 'color 0.5s ease';
+        container.style.color = '#000';
+      } else {
+        body.style.transition = 'background-color 0.5s ease';
+        body.style.backgroundColor = 'black';
+        icon.style.transition = 'filter 0.5s ease';
+        this.iconSrc = 'CPN.png';
+        container.style.transition = 'color 0.5s ease';
+        container.style.color = '#FFF';
+      }
+    },
    slide_text_home: function (event) {
      // `this` inside methods points to the Vue instance
      this.show_about_me = false;
